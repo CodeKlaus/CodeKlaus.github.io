@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Klaus</title>
-  
+  <title>Klaus&#39; blog</title>
+  <subtitle>这个人比较菜.</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://klaus.link/"/>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://klaus.link/2016/12/07/hello-world/"/>
-    <id>http://klaus.link/2016/12/07/hello-world/</id>
+    <link href="http://klaus.link/2016/hello-world/"/>
+    <id>http://klaus.link/2016/hello-world/</id>
     <published>2016-12-06T16:30:23.000Z</published>
     <updated>2016-12-06T16:46:00.000Z</updated>
     
