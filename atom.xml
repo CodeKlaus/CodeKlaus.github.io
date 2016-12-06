@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Klaus</title>
   
-  <link href="/blog/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
-  <link href="http://klaus.link/blog/"/>
+  <link href="http://klaus.link/"/>
   <updated>2016-12-06T16:46:00.000Z</updated>
-  <id>http://klaus.link/blog/</id>
+  <id>http://klaus.link/</id>
   
   <author>
     <name>Klaus</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://klaus.link/blog/2016/12/07/hello-world/"/>
-    <id>http://klaus.link/blog/2016/12/07/hello-world/</id>
+    <link href="http://klaus.link/2016/12/07/hello-world/"/>
+    <id>http://klaus.link/2016/12/07/hello-world/</id>
     <published>2016-12-06T16:30:23.000Z</published>
     <updated>2016-12-06T16:46:00.000Z</updated>
     
