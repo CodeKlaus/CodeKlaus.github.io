@@ -218,6 +218,196 @@
   </entry>
   
   <entry>
+    <title>macOS下 Oh-my-zsh+tmux+vim 打造完美命令行环境</title>
+    <link href="http://klaus.link/2017/Oh-my-zsh+tmux+vim_effective_CommandLine/"/>
+    <id>http://klaus.link/2017/Oh-my-zsh+tmux+vim_effective_CommandLine/</id>
+    <published>2017-02-16T08:25:33.000Z</published>
+    <updated>2017-05-30T20:18:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><p>新学期买了个新显示器专门用来放命令行,忙活了半天,集中解决了许多由来已久的小问题. 顺便总结一下</p>
+<h2 id="0x01-配置zsh"><a href="#0x01-配置zsh" class="headerlink" title="0x01 配置zsh"></a>0x01 配置zsh</h2><p>命令行这种交互方式虽然原始单调,但配置好了,还真不一定比GUI丑.</p>
+<p>大部分*nuix系统上默认的命令行工具都是bash,但是类似于bash的这种命令行工具不止一个. 你在命令行输入zsh就会发现进入到了另外一个shell里面,最主要是有Oh-my-zsh这个好东东啊,自带了上百个插件和主题,不光好看,拓展起来更是极为方便</p>
+<p>首先把默认shell更改为zsh</p>
+<p><code>chsh -s /bin/zsh</code></p>
+<p>然后下载oh-my-zsh插件(自动安装)</p>
+<p><code>wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</code></p>
+<p>装好以后我们来看一下oh-my-zsh的配置文件 在用户的home目录下会有一个.zshrc</p>
+<p>打开以后找到<code>ZSH_THEME</code>这个配置</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus6orlwkj30jt02jaae" alt=""></p>
+<p>通过更改这个配置就可以为shell换上不同的主题啦,oh-my-zsh自带很多主题,可以在<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="external">https://github.com/robbyrussell/oh-my-zsh/wiki/Themes</a> 找到所有的,只需要换成相应的名字就可以了无需安装</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus636v59j30k11amnae" alt=""></p>
+<p>然后我们向下挪一点找到<code>plugins=()</code>这个设置,oh-my-zsh自带了很多插件,我们只需要填到这个括号里就可以启用,这里只介绍几个常用的</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus5hnmjkj30e002oaah" alt=""></p>
+<p>“z”真是太好用的一个插件,他不需要你记住很多目录名,支持模糊匹配,并且带学习功能,越用越好用</p>
+<p>举个栗子,比如我想要去家目录下面的Documents,我只需<code>z doc</code>就可以了,再比如我只要去过一次/etc/php5/apache2这个目录,下次无论你在什么目录下,只要一个<code>z apac</code>就直接跳去了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus58m9szj30sy06xwff" alt=""></p>
+<p>还有”d”插件,这个插件可以查看历史命令然后通过前面的标号快速执行以前的命令,命令比较多的时候,的确是比来回用<code>Ctrl-p</code> <code>Ctrl-n</code> 上下翻方便多了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus4ydjxsj308e0590t6" alt=""></p>
+<p>然后我们再来装一个特别好用的自动补全插件 zsh-autosuggestion </p>
+<p>执行<code>git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions</code></p>
+<p>然后把<code>source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh</code>加到.zshrc里</p>
+<p>然后退出zsh重新进入你就会看到跟fish一样的补全效果了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus48rpjqj306d016dfu" alt=""></p>
+<p>然后<code>Ctrl-e</code>或者右箭头就补全了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus3mknkxj306801a74a" alt=""></p>
+<h2 id="0x02-配置VIM"><a href="#0x02-配置VIM" class="headerlink" title="0x02 配置VIM"></a>0x02 配置VIM</h2><p>既然用命令行,配置一个属于自己的VIM也就是必须的啦,系统自带,小到几十一百行的shell小脚本,大到上百个文件的C++工程,都可用以vim解决. 自古代码编辑器唯快不破,”快”Vim自身就已经解决了,就让我们来看看怎么把vim配置得更加友好易用一些.</p>
+<p>首先在家目录下面打开.vimrc文件,如果没有就自己新建一个</p>
+<p>加上下面这一行就可以在左侧显示行号啦</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> nu <span class="string">"显示行号</span></div></pre></td></tr></table></figure>
+<p>代码高亮/缩进</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">syntax <span class="built_in">enable</span> <span class="string">"开启代码高亮</span></div><div class="line">set showmatch "高亮匹配的括号<span class="string">"</span></div><div class="line">set background = dark "设置暗背景<span class="string">"</span></div><div class="line">set ts = 4 "设置tab为4个空格的宽度<span class="string">"</span></div><div class="line">set expandtab "将tab转化为空格<span class="string">"</span></div><div class="line">set backspace = 2 "开启增强模式,解决macOS下delete失效的问题<span class="string">"</span></div><div class="line">set autoindent "自动缩进<span class="string">"</span></div><div class="line">set textwidth = 79 "单行过长提示<span class="string">"</span></div><div class="line">highlight BadWhitespace ctermbg=red guibg=darkred "高亮错误的空格</div><div class="line">au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/ <span class="string">"高亮多余的空格</span></div></pre></td></tr></table></figure>
+<p>代码折叠</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nnoremap &lt;space&gt; za <span class="string">"把空格映射成za(折叠代码)"</span></div><div class="line"><span class="built_in">set</span> foldmethod=indent <span class="string">"判断代码折叠的方式为缩进"</span></div></pre></td></tr></table></figure>
+<p>这样在函数,或者类上按一下空格这一段代码就会折叠成一行了.</p>
+<p>设置状态栏</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> laststatus = 2 </div><div class="line"><span class="built_in">set</span> statusline=</div><div class="line"><span class="built_in">set</span> statusline=</div><div class="line"><span class="built_in">set</span> statusline +=*\ %&lt;%F%*            <span class="string">"显示文件路径</span></div><div class="line">set statusline +=*%m%*                "文件改动标志</div><div class="line"><span class="built_in">set</span> statusline +=*%=%5l%*             <span class="string">"当前行数</span></div><div class="line">set statusline +=*/%LL\ %*            "总行数</div><div class="line"><span class="built_in">set</span> statusline +=*%vC\ %*             <span class="string">"当前列数</span></div><div class="line">set statusline +=*0x%04B\ %*          "显示光标下字符的十六进制编码</div><div class="line"></div><div class="line"><span class="built_in">set</span> showcmd								<span class="string">"显示输入的vim命令</span></div></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus2cutpsj30k901l402" alt=""></p>
+<p>这里面的F,m,l,L,C之类的就是代表后面的注释,除了这些vim还支持很多,全部标识符和表达式的格式可以在<a href="http://vimdoc.sourceforge.net/htmldoc/options.html#&#39;statusline&#39;" target="_blank" rel="external">http://vimdoc.sourceforge.net/htmldoc/options.html#’statusline’</a>找到</p>
+<p>当然你也可以给它配上颜色</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> statusline=</div><div class="line"><span class="built_in">set</span> statusline +=%1*\ %&lt;%F%*          </div><div class="line"><span class="built_in">set</span> statusline +=%2*%m%*              </div><div class="line"><span class="built_in">set</span> statusline +=*%=%5l%*             </div><div class="line"><span class="built_in">set</span> statusline +=%3*/%LL\ %*            </div><div class="line"><span class="built_in">set</span> statusline +=%3*%vC\ %*              </div><div class="line"><span class="built_in">set</span> statusline +=%2*0x%04B\ %*          </div><div class="line">hi User1 ctermfg=red ctermbg=green</div><div class="line">hi User2 ctermfg=white ctermbg=red</div><div class="line">hi User3 ctermfg=white ctermbg=blue</div><div class="line">hi User4 ctermfg=white ctermbg=green</div></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus2cue15j30k801fab2" alt=""></p>
+<p>前面的%加数字就是编号,用后面的hi来设置颜色(想要什么颜色自己改掉就好)</p>
+<p>然后我们改一下光标的显示方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">highlight CursorColumn ctermbg=black ctermfg=green  <span class="string">"设置当前列颜色</span></div><div class="line">highlight clear LineNr								"取消行号的高亮</div><div class="line"><span class="built_in">set</span> cursorline										<span class="string">"设置当前行下划线</span></div><div class="line"></div><div class="line">set hlsearch										"设置搜索结果高亮</div></pre></td></tr></table></figure>
+<p>这样就有下面的效果了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus1ydo95j307s06it99" alt=""></p>
+<p>然后我们需要解决的一个重要的问题就是复制粘贴,在GUI下面复制粘贴可能是经常干的事情,但是在vim里面我们是不能<code>Ctrl-c</code>的,那我们怎么把vim里面的东西复制出来呢,把下面这条配置写在加在.vimrc里面,把vim的剪贴板与系统的剪切板打通</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> clipboard+=unnamed</div></pre></td></tr></table></figure>
+<p>重新进入vim你就会发现你只需要在v模式下选中内容后按y,再到别的地方<code>Ctrl-v</code>就可以啦</p>
+<p>另外一个问题就是,当我们在外部向vim里面粘贴东西时,整个缩进就乱了,这是因为我们向vim里面粘贴东西时,效果就等同于把复制的内容用键盘一个一个敲进来.为了能把原文照样复制进来,我们加上下面几行设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> pastetoggle =&lt;F1&gt;</div><div class="line">nnoremap &lt;F1&gt; :<span class="built_in">set</span> invpaste paste?&lt;CR&gt;i</div><div class="line">imap &lt;F1&gt; &lt;C-O&gt;:<span class="built_in">set</span> invpaste paste?&lt;CR&gt;</div></pre></td></tr></table></figure>
+<p>这样当我们在普通模式或者插入模式下按下F1的时候就可以切换到paste模式里了,这时候再粘贴格式就不会乱了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus1b7n03j305500rjr9" alt=""></p>
+<p>解决vim烦人的闪屏和告警</p>
+<p>用vim会发现当我们退到不能退的地方继续退格时就会有闪屏和铃声告警,我们加上下面这行设置把它取消掉</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> vb t_vb=</div></pre></td></tr></table></figure>
+<p>设置vim使用UTF-8编码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> encoding=utf-8</div></pre></td></tr></table></figure>
+<p>关闭vi兼容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> nocompatible  <span class="string">"关闭vi兼容,以免之后出现各种错误</span></div></pre></td></tr></table></figure>
+<p>Vim插件管理</p>
+<p>vim除了自身非常强大以外,插件也是必不可少的. 其实也正是Vim支持的众多插件才使vim把一切变成了可能.</p>
+<p>下面就先介绍一下vim的插件管理利器Vundle(当然啦,它也是一个插件)</p>
+<p>项目地址在这里:<a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">https://github.com/VundleVim/Vundle.vim</a></p>
+<p>执行下面的命令安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</div></pre></td></tr></table></figure>
+<p>然后把下面的几行粘到.vimrc里面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&quot;Vundle</div><div class="line">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</div><div class="line">set nocompatible              &quot; be iMproved, required</div><div class="line">filetype off                  &quot; required</div><div class="line">set rtp+=~/.vim/bundle/Vundle.vim</div><div class="line">call vundle#begin()</div><div class="line"></div><div class="line">Plugin &apos;VundleVim/Vundle.vim&apos;</div><div class="line"></div><div class="line">call vundle#end()            &quot; required</div><div class="line">filetype plugin indent on    &quot; required</div><div class="line">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</div></pre></td></tr></table></figure>
+<p>好啦,有了Vundle以后再装别的插件就方便多了,下面让我们来装一个试试</p>
+<p>Vim目录树插件: NERDTree</p>
+<p>项目地址:<a href="https://github.com/scrooloose/nerdtree" target="_blank" rel="external">https://github.com/scrooloose/nerdtree</a></p>
+<p>装上这个以后vim也可以像GUI一样在旁边的侧栏里选择打开文件了</p>
+<p>先上一张效果图</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcurxx16tdj30tk0tl78h" alt=""></p>
+<p>很方便吧</p>
+<p>安装它只需要再上面的配置文件中加上一行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin <span class="string">'scrooloose/nerdtree'</span></div></pre></td></tr></table></figure>
+<p>注意是加在begin()和end()中间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="string">"Vundle</span></div><div class="line">"<span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">"</span></div><div class="line">set nocompatible              " be iMproved, required</div><div class="line">filetype off                  <span class="string">" required</span></div><div class="line">set rtp+=~/.vim/bundle/Vundle.vim</div><div class="line">call vundle#begin()</div><div class="line"></div><div class="line">Plugin 'VundleVim/Vundle.vim'</div><div class="line">Plugin 'scrooloose/nerdtree'</div><div class="line"></div><div class="line">call vundle#end()            " required</div><div class="line">filetype plugin indent on    <span class="string">" required</span></div><div class="line">"<span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span></div></pre></td></tr></table></figure>
+<p>我们在命令行下打开vim,执行:PluginInstall,Vundle就会帮你自动下载安装了</p>
+<p>没错,每一行Plugin对应的就是一个vim插件如果你想禁用掉某个插件直接把那一行注释掉就好了,是不是很方便呢</p>
+<p>默认情况下,你执行:NERDTree会打开目录树,如果你想一打开文件就自动打开NERDTree的话可以在.vimrc里加上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">autocmd vimenter * NERDTree</div></pre></td></tr></table></figure>
+<p>或者你可以把开关NERDTree用某个键映射下来:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">map &lt;C-n&gt; :NERDTreeToggle&lt;CR&gt;</div></pre></td></tr></table></figure>
+<p>更多设置参见:<a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">https://github.com/VundleVim/Vundle.vim</a></p>
+<p>Vim 语法检查</p>
+<p>Vim虽然只是一个代码编辑器,但是装上插件以后照样有IDE一样的代码检查功能</p>
+<p>还是上面的方法,用Vundle安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin <span class="string">'scrooloose/syntastic'</span></div></pre></td></tr></table></figure>
+<p>注意,你运行完:PluginInstall后,syntastic并不是完全可用的,它对某些语言的检查是依赖外部程序的,以python为例,syntastic需要pep8,pylint等等这样的外部程序.所以我们先要安装一个pylint</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install pylint pep8</div></pre></td></tr></table></figure>
+<p>安装好以后在.vimrc里面加上下面几行指定python的检查程序</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="string">"syntastic</span></div><div class="line">"<span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">"</span></div><div class="line">set statusline+=%#warningmsg#</div><div class="line">set statusline+=%&#123;SyntasticStatuslineFlag()&#125;</div><div class="line">set statusline+=%*</div><div class="line">let g:syntastic_always_populate_loc_list = 1</div><div class="line">let g:syntastic_auto_loc_list = 1</div><div class="line">let g:syntastic_check_on_open = 0			"在打开文件时不自动检查</div><div class="line"><span class="built_in">let</span> g:syntastic_check_on_wq = 0				<span class="string">"在wq退出时不执行检查</span></div><div class="line">let g:syntastic_python_checkers=['pep8']  	"pylint检查的项多一些但是慢,这里看自己喜好了<span class="string">"</span></div><div class="line">"<span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">"</span></div></pre></td></tr></table></figure>
+<p>别的语言也是一样,如果你想添加php的支持,就把python换成php就好了,不过别忘了装需要的外部依赖</p>
+<p>这样以后重启vim,打开一段python代码执行w命令保存的时候就会检查并提示报错了</p>
+<p>给一张网上找的图</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcurxi96s9j30od0d276i" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcurwhurgoj30hr0ak75c" alt=""></p>
+<p>Vim自动补全</p>
+<p>代码检查也有了,下面就来配置一下最重要的代码补全,是要用到两个插件,YouCompleteMe,xptemplate.</p>
+<p>我们先看YouCompleteMe,这可是个杀手级的插件啊,光看github上面的星星数就知道了</p>
+<p>项目地址:<a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="external">https://github.com/Valloric/YouCompleteMe</a></p>
+<p>同样既然是vim的插件就先加上下面这行吧:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin <span class="string">'Valloric/YouCompleteMe'</span></div></pre></td></tr></table></figure>
+<p>等:PluginInstall完了以后,这个插件还不能用,这个是需要编译的. <strong>在编译之前先检查一下你的vim是不是7.4.143及其以上并且有python2或3支持</strong>,之后进入YouCompleteMe的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/.vim/bundle/YouCompleteMe</div></pre></td></tr></table></figure>
+<p>然后执行install.py就可以编译了,这里还有几个选项需要注意一下</p>
+<ul>
+<li><code>--clang-completer</code>  对C-family的支持</li>
+<li><code>--omnisharp-completer</code>  对C#的支持,需要安装Mono</li>
+<li><code>--gocode-completer</code>  对Go的支持,需要安装Go</li>
+<li><code>--tern-completer</code>  对js的支持,需要安装Node.js和npm</li>
+<li><code>--racer-completer</code>  对Rust的支持</li>
+</ul>
+<p>或者你直接 <code>./install.py —all</code>  选中对所有语言的支持</p>
+<p>编译需要一点时间,也很耗费资源,如果你机器配置太低的话,很有可能就直接卡死</p>
+<p>编译好了以后,我们把下面的几行配置加入到.vimrc里</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> g:ycm_autoclose_preview_window_after_completion=1</div><div class="line">map &lt;leader&gt;g  :YcmCompleter GoToDefinitionElseDeclaration&lt;CR&gt;</div><div class="line"><span class="built_in">let</span> g:ycm_global_ycm_extra_conf = <span class="string">'~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'</span></div><div class="line"><span class="built_in">let</span> g:ycm_confirm_extra_conf = 0</div></pre></td></tr></table></figure>
+<p>好啦,重启vim你就可以拥有IDE般的自动补全了,注意上面第二行映射了一个键,在函数调用的地方按下<code>&lt;leader&gt;g</code>就可以跳转到函数定义的地方了(vim默认的\<leader\>是<code>\</code>,可以通过添加<code>let mapleader=</code>修改)</leader\></p>
+<p>再来看一下xptemplate</p>
+<p>xptemplate是可以补全各种结构的,比如你一个for,再按一下tab整个循环体就出来了,来一张官网上的图:</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcurvznzskg30go06odjw" alt=""></p>
+<p>这个插件安装非常简单,只需要添加上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin <span class="string">'drmingdrmer/xptemplate'</span></div></pre></td></tr></table></figure>
+<p>就可以了. 其实这个还支持自己定义的结构,这里就不多说了,自带的对我来说已经够用了,见<a href="https://github.com/drmingdrmer/xptemplate" target="_blank" rel="external">https://github.com/drmingdrmer/xptemplate</a></p>
+<p>但是需要注意的是,用tab在各个代码块之间切换的时候有时候是会和上面的YouCompleteMe冲突的,为了解决这个问题,我添加了一条:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">"xptemplate</span></div><div class="line">"<span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span></div><div class="line"><span class="built_in">let</span> g:xptemplate_nav_next = <span class="string">'&lt;C-I&gt;'</span></div><div class="line"><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">""</span><span class="string">"</span></div></pre></td></tr></table></figure>
+<p>用<code>Ctrl-i</code>来替代tab跳到下一个代码块,xptemplate有很多键都是可以改的,在项目地址里有很详细的介绍</p>
+<p>代码注释</p>
+<p>最后再让我们看一个代码注释的插件,代码注释/还原肯定是日常避免不了的,也是一件很麻烦的事情nerdcommenter可以帮我们省去不少的麻烦</p>
+<p>安装同上:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin <span class="string">'scrooloose/nerdcommenter'</span></div></pre></td></tr></table></figure>
+<p>nerdcommenter支持很多种注释方式,最常用的<code>[count]&lt;leader&gt;c&lt;space&gt;</code> [count]是行数,\<leader\>默认是<code>\</code></leader\></p>
+<p>比如我们在33行上键入<code>5\c空格</code> 33到38就被注释了,再重复一遍操作就取消注释了.  行数是可选的,直接选中内容<code>\c空格</code>也是一样的.</p>
+<p>nerdcommenter有很多可选项,比如在注释符后面加空格啊之类的,详见:<a href="https://github.com/scrooloose/nerdcommenter" target="_blank" rel="external">https://github.com/scrooloose/nerdcommenter</a></p>
+<h2 id="0x03-配置Tmux"><a href="#0x03-配置Tmux" class="headerlink" title="0x03 配置Tmux"></a>0x03 配置Tmux</h2><p>Tmux可以把你的terminal窗口分块,在多个会话间切换,效率瞬间提升,并且如果是在远端服务器上还不怕连接中断,回家吃个饭,attach一下接着干</p>
+<p>首先安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install tmux</div></pre></td></tr></table></figure>
+<p>tmux对我而言,最大的需求就是分屏分窗口和来回切换,其实tmux也有很多设置,也有自己的插件系统,但相比上面的Vim来说只需要简单设置就可以使用了</p>
+<p>首先打开家目录下面的.tmux.conf(如果没有自己新建一个)</p>
+<p>我们第一步先把先把\<prefix\>换成别的:(\<prefix\>就相当于vim里面的\<leader\>)</leader\></prefix\></prefix\></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> -g prefix C-q</div><div class="line">unbind C-b</div></pre></td></tr></table></figure>
+<p>tmux的默认前缀是<code>Ctrl-b</code>不太方便,所以换成了<code>Ctrl-q</code>同时释放<code>Ctrl-b</code></p>
+<p>这里之所以方便是因为我把键盘上<code>CapsLock</code>和<code>Ctrl</code>键换了位置</p>
+<p>然后让我们看看怎么用吧</p>
+<p>我们先按下<code>Ctrl-q</code>然后再按下<code>v</code>就会发现当前的窗口变成上下两半了,然后再按<code>Ctrl-q</code> <code>h</code>就又分成了左右两半</p>
+<p>然后通过<code>Ctrl-q</code> <code>上下左右</code>就可以在不同的panel间移动了,是不是很有用呢,另外按下<code>Ctrl-q</code> <code>q</code>可以显示各个panel的编号,通过数字就可以直接切换过去了</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcurvnhigrj31ao0t6tdr" alt=""></p>
+<p>然后再试一下<code>Ctrl-q</code> <code>c</code>就会新建一个窗口,通过<code>Ctrl-q</code> <code>n</code>或<code>p</code>来在不同的窗口间移动,有没有感觉比一个个开terminal窗口高效多了呢</p>
+<p>根据个人喜好,在.tmux.conf里面加入下面几行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">bind</span> | split-window -h</div><div class="line"><span class="built_in">bind</span> - split-window -v</div><div class="line"></div><div class="line"><span class="built_in">bind</span> h select-pane -L</div><div class="line"><span class="built_in">bind</span> j select-pane -D</div><div class="line"><span class="built_in">bind</span> k select-pane -U</div><div class="line"><span class="built_in">bind</span> l select-pane -R</div></pre></td></tr></table></figure>
+<p>这样我们把水平分屏和垂直分屏映射成了<code>|</code>和<code>-</code>,这样子一目了然是不是,然后把上下左右来控制的panel间移动改成了和vim一样的<code>hjkl</code>用起来就更顺手啦</p>
+<p>然后我们给tmux加上鼠标支持,在.tmux.conf中加入以下几行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> -g mouse on</div><div class="line"><span class="built_in">bind</span> -n WheelUpPane <span class="keyword">if</span>-shell -F -t = <span class="string">"#&#123;mouse_any_flag&#125;"</span> <span class="string">"send-keys -M"</span> <span class="string">"if -Ft= '#&#123;pane_in_mode&#125;' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"</span></div><div class="line"><span class="built_in">bind</span> -n WheelDownPane select-pane -t= \; send-keys -M</div></pre></td></tr></table></figure>
+<p>重启tmux以后就会发现用鼠标也可以点击选择panel了,也可以使用滑轮去翻动历史内容了 </p>
+<p>然后和vim一样我们还是要解决tmux复制粘贴的问题</p>
+<p>首先需要安装两样东西,一个是tmux-yank,一个是reattach-to-user-namespace</p>
+<p>我们先来安装tmux-yank,先在家目录下面新建一个文件夹.tmux(别的也行),然后在.tmux目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/tmux-plugins/tmux-yank.git</div></pre></td></tr></table></figure>
+<p>之后安装reattach-to-user-namespace</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install reattach-to-user-namespace</div></pre></td></tr></table></figure>
+<p>然后在.tmux.conf里添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">setw -g mode-keys vi</div><div class="line"><span class="built_in">bind</span> Escape copy-mode</div><div class="line">unbind p</div><div class="line"><span class="built_in">bind</span> p paste-buffer</div><div class="line"><span class="built_in">bind</span>-key -t vi-copy <span class="string">'v'</span> begin-selection</div><div class="line"><span class="built_in">bind</span>-key -t vi-copy <span class="string">'y'</span> copy-selection</div><div class="line"></div><div class="line"><span class="built_in">set</span> -g default-command <span class="string">"reattach-to-user-namespace -l zsh"</span></div><div class="line">run-shell ~/.tmux/tmux-yank/yank.tmux</div></pre></td></tr></table></figure>
+<p>然后重启tmux,这时候按下<code>Ctrl-q</code> <code>[</code>就会发现,通过<code>hjkl</code>可以让光标在命令行窗口里的任意地方移动,和vim操作完全一样,然后按下<code>v</code>选择想要复制的内容再按下<code>y</code>就复制到系统剪贴板里面了</p>
+<h1 id="0x04-参考"><a href="#0x04-参考" class="headerlink" title="0x04 参考"></a>0x04 参考</h1><p>Tmux,Vim,zsh的配置远远不止这些,这里只介绍了一些简单的,也可以应付一般需求了. 更详细的配置可以查询手册,顺便推荐给大家两本书,关于vim和tmux的:</p>
+<p>\<tmux-productive mouse-free="" development\=""></tmux-productive></p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcuruc9ep4j30ef0kdtd2" alt=""></p>
+<p>\<vim实用技巧\></vim实用技巧\></p>
+<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcurucdnn0j30cu0g4tbw" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h1&gt;&lt;p&gt;新学期买了个新显示器专门用来放命令行,忙活了半天,集中解决了许多由来已久的小问题. 顺便总结一下&lt;/p&gt;
+&lt;h2 id=&quot;0
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
     <link href="http://klaus.link/2016/hello-world/"/>
     <id>http://klaus.link/2016/hello-world/</id>
