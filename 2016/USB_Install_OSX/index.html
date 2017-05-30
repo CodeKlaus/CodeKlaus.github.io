@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>制作OS X启动U盘重装Mac操作系统 | Klaus&#39; blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="0x00今天朋友的Mac出了点问题想重装系统, 然而把主分区抹了以后发现自己装不回去了…………  虽然我一直在用Mac,然而我的系统从来没有出现过问题,这也是自己第一次尝试, 中间还是有几个坑, 在网上左查右查还是费了不少劲, 在这里记录一下, 希望有人看到这篇文章可以少踩一些坑……
+0x01 遇到”This item is temporarily unavailable.”好啦,首先当然就是重启">
+<meta property="og:type" content="article">
+<meta property="og:title" content="制作OS X启动U盘重装Mac操作系统">
+<meta property="og:url" content="http://klaus.link/2016/USB_Install_OSX/index.html">
+<meta property="og:site_name" content="Klaus' blog">
+<meta property="og:description" content="0x00今天朋友的Mac出了点问题想重装系统, 然而把主分区抹了以后发现自己装不回去了…………  虽然我一直在用Mac,然而我的系统从来没有出现过问题,这也是自己第一次尝试, 中间还是有几个坑, 在网上左查右查还是费了不少劲, 在这里记录一下, 希望有人看到这篇文章可以少踩一些坑……
+0x01 遇到”This item is temporarily unavailable.”好啦,首先当然就是重启">
+<meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170531149617420597017.png">
+<meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170531149617424046344.png">
+<meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170531149617426179554.png">
+<meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/2017053114961743144415.png">
+<meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170531149617433654794.png">
+<meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170531149617436624094.png">
+<meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/201705311496174399554.png">
+<meta property="og:updated_time" content="2017-05-30T20:09:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="制作OS X启动U盘重装Mac操作系统">
+<meta name="twitter:description" content="0x00今天朋友的Mac出了点问题想重装系统, 然而把主分区抹了以后发现自己装不回去了…………  虽然我一直在用Mac,然而我的系统从来没有出现过问题,这也是自己第一次尝试, 中间还是有几个坑, 在网上左查右查还是费了不少劲, 在这里记录一下, 希望有人看到这篇文章可以少踩一些坑……
+0x01 遇到”This item is temporarily unavailable.”好啦,首先当然就是重启">
+<meta name="twitter:image" content="http://ony7wielg.bkt.clouddn.com/20170531149617420597017.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Klaus&#39; blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/typing.css">
+</head>
+
+  
+    <body>
+  
+      <div id="container" class="container">
+        <article id="post-USB_Install_OSX" class="article article-type-post" itemscope itemprop="blogPost">
+  <header id="header" class="header">
+  <nav id="main-nav" class="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/fragments">Fragments</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      制作OS X启动U盘重装Mac操作系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry typo" itemprop="articleBody">
+      
+        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>今天朋友的Mac出了点问题想重装系统, 然而把主分区抹了以后发现自己装不回去了…………  虽然我一直在用Mac,然而我的系统从来没有出现过问题,这也是自己第一次尝试, 中间还是有几个坑, 在网上左查右查还是费了不少劲, 在这里记录一下, 希望有人看到这篇文章可以少踩一些坑……</p>
+<h2 id="0x01-遇到”This-item-is-temporarily-unavailable-”"><a href="#0x01-遇到”This-item-is-temporarily-unavailable-”" class="headerlink" title="0x01 遇到”This item is temporarily unavailable.”"></a>0x01 遇到”This item is temporarily unavailable.”</h2><p>好啦,首先当然就是重启电脑啦,然后开机的时候按住option键,开机的时候可以选择启动磁盘,选择那个Recovery 分区(这张图上没有),就可以进去恢复模式了,或者开机按住<strong>Command+R</strong> 也可以 (朋友Mac上主分区已经抹了所以开机直接就进到这里了)</p>
+<p> <img src="http://ony7wielg.bkt.clouddn.com/20170531149617420597017.png" alt="20170531149617420597017.png"><img src="http://ony7wielg.bkt.clouddn.com/20170531149617424046344.png" alt="20170531149617424046344.png"></p>
+<p>(图片来自Apple Support)</p>
+<p>然后正常来讲点那个Reinstall选择磁盘,填上Apple ID就可以啦,一切都应该很顺利.</p>
+<p>然而事实并非那么美好……..</p>
+<p> <img src="http://ony7wielg.bkt.clouddn.com/20170531149617426179554.png" alt="20170531149617426179554.png"></p>
+<p>(大概长这个样子,图片来自<a href="https://www.youtube.com/watch?v=WqBOZWeJaDM" target="_blank" rel="external">https://www.youtube.com/watch?v=WqBOZWeJaDM</a>)</p>
+<p>首先就遇到了第一个问题<strong>“This item is temporarily unavailable. Please try again later”</strong>   填完Apple ID以后就弹出来个这个东东…看意思还以为自己网络不好,多次尝试,重启,依然是这样,于是上网搜之,基本有这么几种答案:</p>
+<ol>
+<li><p>你填写的Apple ID必须要是你注册这台机器的时候使用的ID,如果中间换ID了是不可以的,还是要填原来的才可以.    然而朋友的Mac用了好几年了,一开始那个ID怎么也想不起来了,遂作罢……</p>
+</li>
+<li><p>开机按住<strong>Option+Command+R</strong>进入网络恢复模式. 就可以不用上面那个Apple ID的验证了,然而这个网络安装的速度真是……每次都是百分之几就死掉了…..最后我认定在这种网络环境下不可能成功,作罢……</p>
+</li>
+<li><p>制作USB启动优盘来引导重装OS X,这个好,既可以解决Apple ID的麻烦,下载还快,并且还很想我们重装Windows/Linux的方法.</p>
+<p>​</p>
+</li>
+</ol>
+<h2 id="0x02-制作USB启动盘"><a href="#0x02-制作USB启动盘" class="headerlink" title="0x02 制作USB启动盘"></a>0x02 制作USB启动盘</h2><p>制作USB启动盘,当然得先有一块U盘啦~(<strong>注意 8GB或以上</strong>) </p>
+<p>好啦,找一块U盘插到电脑上,打开Disk Utility按下图配置将U盘格式化</p>
+<p> <img src="http://ony7wielg.bkt.clouddn.com/2017053114961743144415.png" alt="2017053114961743144415.png"></p>
+<p>(图片来自<a href="http://www.jianshu.com/p/2ff576583361" target="_blank" rel="external">http://www.jianshu.com/p/2ff576583361</a>)</p>
+<p>然后要去网上下载OS X的镜像啦~</p>
+<pre><code>&gt;http://dl.iplaysoft.com/files/3423.html        OS X El Capitan(0dc524cc24d98b87195fb220588a7746)
+</code></pre><p>下载好了以后最好先校验一下MD5值看文件有没有丢失损坏</p>
+<p>这个可以直接用mac自带的md5命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Klaus@Mac ~&gt; md5 /Users/klaus/Downloads/aa448e3591b4ff2a89abc4a124a26934.dmg</div><div class="line"></div><div class="line">MD5 (/Users/klaus/Downloads/aa448e3591b4ff2a89abc4a124a26934.dmg) = 0dc524cc24d98b87195fb220588a7746</div></pre></td></tr></table></figure>
+<p>下载好了以后打开这个dmg把里面那个APP拖出来,放到随意一个地方,然后用下面的命令把安装程序烧录到U盘里面:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Klaus@Mac ~&gt; sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/Untitled --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app --nointeraction</div><div class="line"></div><div class="line">Erasing Disk: 0%... 10%... 20%... 30%...100%...</div><div class="line">Copying installer files to disk...</div><div class="line">Copy complete.</div><div class="line">Making disk bootable...</div><div class="line">Copying boot files...</div><div class="line">Copy complete.</div><div class="line">Done.</div></pre></td></tr></table></figure>
+<p>我是拖到Application里了,Install OS X El Capitan.app是安装包,/Volumes/Untitled是你想要烧的U盘的路径,如果你路径不一样或者改名了,一定要记着改过来. 然后就等着出现下面的Done,这时启动U盘就制作好啦.</p>
+<p>制作引导安装器的命令可参考:</p>
+<blockquote>
+<p><a href="https://support.apple.com/zh-cn/HT201372" target="_blank" rel="external">https://support.apple.com/zh-cn/HT201372</a></p>
+</blockquote>
+<h2 id="0x03-从U盘引导安装OS-X-El-Capitan"><a href="#0x03-从U盘引导安装OS-X-El-Capitan" class="headerlink" title="0x03 从U盘引导安装OS X El Capitan"></a>0x03 从U盘引导安装OS X El Capitan</h2><p>然后把优盘插在你要恢复的电脑上按住Option键重启,选择从U盘启动</p>
+<p> <img src="http://ony7wielg.bkt.clouddn.com/20170531149617433654794.png" alt="20170531149617433654794.png">)</p>
+<p>(图片来自<a href="http://www.jianshu.com/p/2ff576583361" target="_blank" rel="external">http://www.jianshu.com/p/2ff576583361</a>)</p>
+<p>如果你下载的镜像没有问题的话点击去就可以安装啦 <img src="http://ony7wielg.bkt.clouddn.com/20170531149617436624094.png" alt="20170531149617436624094.png"></p>
+<p>(图片来自<a href="http://www.jianshu.com/p/2ff576583361" target="_blank" rel="external">http://www.jianshu.com/p/2ff576583361</a>)</p>
+<p>然而……….事实不是这样的…….你还会遇到 <strong>“This copy of the Install OS X El Capitan application can’t be verified. It may have been corrupted or tampered with during downloading”</strong></p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/201705311496174399554.png" alt="201705311496174399554.png"></p>
+<p>(图片来自<a href="http://apple.stackexchange.com/questions/216730/this-copy-of-the-install-os-x-el-capitan-application-cant-be-verified-it-may-h" target="_blank" rel="external">http://apple.stackexchange.com/questions/216730/this-copy-of-the-install-os-x-el-capitan-application-cant-be-verified-it-may-h</a>)</p>
+<p>乍一看还以为自己的下载的镜像或者烧录的时候出了问题,再网上一搜才知道是这么回事:</p>
+<p>我们需要把电脑上的日期往后调一点才能正常地安装,调整到大概你安装OS X El Capitan的时候(或者是之前我想)</p>
+<blockquote>
+<p>参考 <a href="http://apple.stackexchange.com/questions/216730/this-copy-of-the-install-os-x-el-capitan-application-cant-be-verified-it-may-h" target="_blank" rel="external">http://apple.stackexchange.com/questions/216730/this-copy-of-the-install-os-x-el-capitan-application-cant-be-verified-it-may-h</a></p>
+<p><a href="http://apple.stackexchange.com/users/174296/kimbaudi" target="_blank" rel="external">kimbaudi</a>@stackexchange</p>
+<p>I think many people think setting the date to the current date automatically fixes the issue, but this is not the case. You have to remember the date you installed “El Capitan OS X installer.app” into your Application folder. For me, it was around Sept 2015. Right now is March 2016. When I got this error while reinstalling El Capitan OS X, I set the date to today’s date (i.e. date 03061225616) and it did not work because I installed “El Capitan OS X installer.app” around Sept 2015 and the digital signature/certificates for my installer had expired by now. Once I reset the date to Sept 2015 (i.e. date 0923020415), the installation worked without a problem.</p>
+<p>If you can neither remember nor correctly guess the date you installed “El Capitan OS X installer.app” into your Application folder, then you would have to delete it and reinstall it into your Applications folder so that the digital signature/certficates for the installer is no longer expired.</p>
+<p>Also, setting the date manually in the terminal (i.e. date MMDDhhmmYY) worked for me. I heard setting the date automatically in the terminal (i.e. ntpdate -u time.apple.com) works for some people, but not for me. It most likely worked for them because they recently installed/reinstalled “El Capitan OS X installer.app” into their Application folder</p>
+</blockquote>
+<p>具体操作就是关掉现在出错的这个窗口在你的Recovery Utilities中是可以打开Terminal的键入命令(找不到看下面视频):</p>
+<p><code>Date 0328015315</code></p>
+<p>就可以啦</p>
+<blockquote>
+<p>参考<a href="https://www.youtube.com/watch?v=LRPiynS15_U(有个视频" target="_blank" rel="external">https://www.youtube.com/watch?v=LRPiynS15_U(有个视频</a>)</p>
+<p><a href="https://www.youtube.com/channel/UCm1G-I81061vLmwSCTBzq3w" target="_blank" rel="external">Easy Steps</a>@Youtube</p>
+<p>How to fix OS X application can’t be verified | OS X El Capitan | macOS Sierra | Yosemite Corrupted or Damaged during Downloading in Easy Steps.<br>“ This copy of the install OS X Yosemite (any OS X) application can’t be verified. It may have been corrupted or tampered with during downloading”<br>(USE THE SAME DATE “below” FOR OLDER INSTALLER OS X)<br>Try the same date for older version, as shown below and it will work. (once it’s installed then changed to current date)<br>For El Capitan and macOS Sierra change it to current date.<br>Terminal command: (example)<br>Date 0328015315<br>(monthdatetimeyear) String of numbers = month 03, date 28, time 0153, and year 15, combined.</p>
+<p>************************************************************************************</p>
+<p>IF IT STILL FAIL, THEN TRY TO CHANGE THE DATE BACK TO “January 01 2016 or 0101(current time)(current year)”<br>“010100002016”</p>
+<p>************************************************************************************</p>
+</blockquote>
+<p>改好日期,就真的可以装啦~(至少我是) 然后装好系统别忘把日期改回来,不然以后升级的时候又会遇到问题</p>
+<h1 id="0x04-参考"><a href="#0x04-参考" class="headerlink" title="0x04 参考"></a>0x04 参考</h1><p><a href="http://www.iplaysoft.com/osx-yosemite-usb-install-drive.html" target="_blank" rel="external">http://www.iplaysoft.com/osx-yosemite-usb-install-drive.html</a></p>
+<p><a href="https://www.youtube.com/watch?v=LRPiynS15_U" target="_blank" rel="external">https://www.youtube.com/watch?v=LRPiynS15_U</a></p>
+<p><a href="http://apple.stackexchange.com/questions/216730/this-copy-of-the-install-os-x-el-capitan-application-cant-be-verified-it-may-h" target="_blank" rel="external">http://apple.stackexchange.com/questions/216730/this-copy-of-the-install-os-x-el-capitan-application-cant-be-verified-it-may-h</a></p>
+<p><a href="https://support.apple.com/zh-cn/HT201372" target="_blank" rel="external">https://support.apple.com/zh-cn/HT201372</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2016/USB_Install_OSX/" class="article-date">
+  <time datetime="2016-10-16T15:26:23.000Z" itemprop="datePublished">10/16/16</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2016/hello-world/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <span id="article-nav-older" class="article-nav-link-wrap older"></span>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+<section id="comments" class="comments">
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//klaus-link.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>     
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>© 2016 Klaus Powered by <a href="https://hexo.io">Hexo</a> Theme © <a href="https://github.com/geekplux">GeekPlux</a></p>
+
+
+      </div>
+    </footer>
+
+      
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+
+<script src="/js/typing.js"></script>
+<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
