@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://klaus.link/2017/Oh-my-zsh+tmux+vim_effective_CommandLine/</loc>
+    
+    <lastmod>2017-06-02T20:46:13.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://klaus.link/2016/USB_Install_OSX/</loc>
     
     <lastmod>2017-06-02T17:59:59.000Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://klaus.link/links.html</loc>
     
     <lastmod>2017-05-31T17:10:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://klaus.link/2017/Oh-my-zsh+tmux+vim_effective_CommandLine/</loc>
-    
-    <lastmod>2017-05-30T20:18:56.000Z</lastmod>
     
   </url>
   

@@ -222,7 +222,7 @@
     <link href="http://klaus.link/2017/Oh-my-zsh+tmux+vim_effective_CommandLine/"/>
     <id>http://klaus.link/2017/Oh-my-zsh+tmux+vim_effective_CommandLine/</id>
     <published>2017-02-16T08:25:33.000Z</published>
-    <updated>2017-05-30T20:18:56.000Z</updated>
+    <updated>2017-06-02T20:46:13.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><p>新学期买了个新显示器专门用来放命令行,忙活了半天,集中解决了许多由来已久的小问题. 顺便总结一下</p>
 <h2 id="0x01-配置zsh"><a href="#0x01-配置zsh" class="headerlink" title="0x01 配置zsh"></a>0x01 配置zsh</h2><p>命令行这种交互方式虽然原始单调,但配置好了,还真不一定比GUI丑.</p>
@@ -233,7 +233,7 @@
 <p><code>wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</code></p>
 <p>装好以后我们来看一下oh-my-zsh的配置文件 在用户的home目录下会有一个.zshrc</p>
 <p>打开以后找到<code>ZSH_THEME</code>这个配置</p>
-<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus6orlwkj30jt02jaae" alt=""></p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170603149643635455585.jpg" alt="20170603149643635455585.jpg"></p>
 <p>通过更改这个配置就可以为shell换上不同的主题啦,oh-my-zsh自带很多主题,可以在<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="external">https://github.com/robbyrussell/oh-my-zsh/wiki/Themes</a> 找到所有的,只需要换成相应的名字就可以了无需安装</p>
 <p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus636v59j30k11amnae" alt=""></p>
 <p>然后我们向下挪一点找到<code>plugins=()</code>这个设置,oh-my-zsh自带了很多插件,我们只需要填到这个括号里就可以启用,这里只介绍几个常用的</p>
