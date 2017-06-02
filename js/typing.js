@@ -21,6 +21,6 @@
   })
 
   if ($.fancybox) {
-    $('[data-fancybox]').fancybox()
+    $('.fancybox').fancybox()
   }
 })(jQuery)
