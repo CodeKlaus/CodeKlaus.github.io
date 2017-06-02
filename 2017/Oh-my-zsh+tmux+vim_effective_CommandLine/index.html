@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643666982275.jpg">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643669035640.jpg">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643671094537.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tT0yqly1fcus2cutpsj30k901l402">
+<meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643673173307.jpg">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643673173307.jpg">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643675116253.jpg">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643692892529.jpg">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643705731693.jpg">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643709669861.jpg">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170603149643712943978.jpg">
-<meta property="og:updated_time" content="2017-06-02T20:58:56.000Z">
+<meta property="og:updated_time" content="2017-06-02T21:02:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="macOS下 Oh-my-zsh+tmux+vim 打造完美命令行环境">
 <meta name="twitter:description" content="0x00新学期买了个新显示器专门用来放命令行,忙活了半天,集中解决了许多由来已久的小问题. 顺便总结一下
@@ -123,7 +123,7 @@
 <p>这样在函数,或者类上按一下空格这一段代码就会折叠成一行了.</p>
 <p>设置状态栏</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> laststatus = 2 </div><div class="line"><span class="built_in">set</span> statusline=</div><div class="line"><span class="built_in">set</span> statusline=</div><div class="line"><span class="built_in">set</span> statusline +=*\ %&lt;%F%*            <span class="string">"显示文件路径</span></div><div class="line">set statusline +=*%m%*                "文件改动标志</div><div class="line"><span class="built_in">set</span> statusline +=*%=%5l%*             <span class="string">"当前行数</span></div><div class="line">set statusline +=*/%LL\ %*            "总行数</div><div class="line"><span class="built_in">set</span> statusline +=*%vC\ %*             <span class="string">"当前列数</span></div><div class="line">set statusline +=*0x%04B\ %*          "显示光标下字符的十六进制编码</div><div class="line"></div><div class="line"><span class="built_in">set</span> showcmd								<span class="string">"显示输入的vim命令</span></div></pre></td></tr></table></figure>
-<p><img src="http://ww1.sinaimg.cn/large/006tT0yqly1fcus2cutpsj30k901l402" alt=""></p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170603149643673173307.jpg" alt="20170603149643673173307.jpg"></p>
 <p>这里面的F,m,l,L,C之类的就是代表后面的注释,除了这些vim还支持很多,全部标识符和表达式的格式可以在<a href="http://vimdoc.sourceforge.net/htmldoc/options.html#&#39;statusline&#39;" target="_blank" rel="external">http://vimdoc.sourceforge.net/htmldoc/options.html#’statusline’</a>找到</p>
 <p>当然你也可以给它配上颜色</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> statusline=</div><div class="line"><span class="built_in">set</span> statusline +=%1*\ %&lt;%F%*          </div><div class="line"><span class="built_in">set</span> statusline +=%2*%m%*              </div><div class="line"><span class="built_in">set</span> statusline +=*%=%5l%*             </div><div class="line"><span class="built_in">set</span> statusline +=%3*/%LL\ %*            </div><div class="line"><span class="built_in">set</span> statusline +=%3*%vC\ %*              </div><div class="line"><span class="built_in">set</span> statusline +=%2*0x%04B\ %*          </div><div class="line">hi User1 ctermfg=red ctermbg=green</div><div class="line">hi User2 ctermfg=white ctermbg=red</div><div class="line">hi User3 ctermfg=white ctermbg=blue</div><div class="line">hi User4 ctermfg=white ctermbg=green</div></pre></td></tr></table></figure>
