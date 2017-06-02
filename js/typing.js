@@ -21,6 +21,10 @@
   })
 
   if ($.fancybox) {
-    $('.fancybox').fancybox()
+    $('.fancybox').fancybox({
+      image : {
+        loop : true
+      }
+    })
   }
 })(jQuery)
