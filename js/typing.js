@@ -21,11 +21,6 @@
   })
 
   if ($.fancybox) {
-    $('.fancybox').fancybox({
-      loop : true,
-      'transitionIn' : 'elastic',
-      'transitionOut' : 'elastic'
-        
-    })
+    $('.fancybox').fancybox()
   }
 })(jQuery)
