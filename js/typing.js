@@ -11,7 +11,7 @@
                       '</span>')
       }
 
-      $(this).wrap('<a data-fancybox href="' + this.src + '" title="' + alt +
+      $(this).wrap('<a href="' + this.src + '" title="' + alt +
                    '" class="fancybox"></a>')
     })
 
