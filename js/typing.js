@@ -25,7 +25,10 @@
       'cyclic' : 'true',
       'autoScale' : 'true',
       'showCloseButton' : 'false',
-      'enableEscapeButton' : 'false'
+      'padding' : 0,
+      'margin' : 0,
+      'transitionIn' : 'elastic',
+      'transitionOut' : 'elastic'
         
     })
   }
