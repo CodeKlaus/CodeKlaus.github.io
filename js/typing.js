@@ -22,11 +22,7 @@
 
   if ($.fancybox) {
     $('.fancybox').fancybox({
-      'cyclic' : true,
-      'autoScale' : true,
-      'showCloseButton' : false,
-      'padding' : 0,
-      'margin' : 0,
+      loop : true,
       'transitionIn' : 'elastic',
       'transitionOut' : 'elastic'
         
