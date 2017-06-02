@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://klaus.link/"/>
-  <updated>2017-05-30T18:52:51.000Z</updated>
+  <updated>2017-06-02T13:44:33.000Z</updated>
   <id>http://klaus.link/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://klaus.link/2017/Hash_Length_Extension_Attacks_in_Web/"/>
     <id>http://klaus.link/2017/Hash_Length_Extension_Attacks_in_Web/</id>
     <published>2017-05-07T08:50:07.000Z</published>
-    <updated>2017-05-30T18:52:51.000Z</updated>
+    <updated>2017-06-02T13:44:33.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0x01-攻击场景"><a href="#0x01-攻击场景" class="headerlink" title="0x01 攻击场景"></a>0x01 攻击场景</h2><p>哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为<code>$MAC = H($secret, $message)</code>  的情况. 其中<code>H()</code>为hash函数, <code>$secret</code>为保存在服务器上的秘密信息. 当这里hash函数为<code>MD4</code> <code>MD5</code> <code>SHA-0</code> <code>SHA-1</code> <code>SHA-256</code> <code>SHA-512</code> 等基于MD结构的算法时. 我们就可以在知道<code>$secret</code>长度和一组 <code>$message</code> <code>$MAC</code> 的情况下构造出 <code>$message + padding + $yourmessage</code> 的hash从而绕过服务器上的某些验证.</p>
+    <content type="html"><![CDATA[<h2 id="0x01-攻击场景"><a href="#0x01-攻击场景" class="headerlink" title="0x01 攻击场景"></a>0x01 攻击场景</h2><p>哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为 <code>$MAC = H($secret, $message)</code> 的情况. 其中 <code>H()</code> 为hash函数, <code>$secret</code>为保存在服务器上的秘密信息. 当这里hash函数为 <code>MD4</code> <code>MD5</code> <code>SHA-0</code> <code>SHA-1</code> <code>SHA-256</code> <code>SHA-512</code> 等基于MD结构的算法时. 我们就可以在知道 <code>$secret</code> 长度和一组 <code>$message</code> <code>$MAC</code> 的情况下构造出 <code>$message + padding + $yourmessage</code> 的hash从而绕过服务器上的某些验证.</p>
 <p><img src="http://ony7wielg.bkt.clouddn.com/20170511149444910318886.png" alt=""></p>
 <h2 id="0x02-Message-Authentication-Code-MAC"><a href="#0x02-Message-Authentication-Code-MAC" class="headerlink" title="0x02 Message Authentication Code(MAC)"></a>0x02 Message Authentication Code(MAC)</h2><p>在密码学中, 消息认证码(MAC)用于保证消息的完整性(integrity)和真实性(authenticity).</p>
 <p><img src="http://ony7wielg.bkt.clouddn.com/20170511149444648852381.png" alt=""></p>

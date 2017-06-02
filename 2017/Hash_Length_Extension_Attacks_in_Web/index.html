@@ -5,12 +5,12 @@
   
   <title>Web中的密码学之哈希长度扩展攻击 | Klaus&#39; blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0x01 攻击场景哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为$MAC = H($secret, $message)  的情况. 其中H()为hash函数, $secret为保存在服务器上的秘密信息. 当这里hash函数为MD4 MD5 SHA-0 SHA-1 SHA-256 SHA-512 等基于MD结构的算法时. 我们就可以在知道$se">
+  <meta name="description" content="0x01 攻击场景哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为 $MAC = H($secret, $message) 的情况. 其中 H() 为hash函数, $secret为保存在服务器上的秘密信息. 当这里hash函数为 MD4 MD5 SHA-0 SHA-1 SHA-256 SHA-512 等基于MD结构的算法时. 我们就可以在知道">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Web中的密码学之哈希长度扩展攻击">
 <meta property="og:url" content="http://klaus.link/2017/Hash_Length_Extension_Attacks_in_Web/index.html">
 <meta property="og:site_name" content="Klaus' blog">
-<meta property="og:description" content="0x01 攻击场景哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为$MAC = H($secret, $message)  的情况. 其中H()为hash函数, $secret为保存在服务器上的秘密信息. 当这里hash函数为MD4 MD5 SHA-0 SHA-1 SHA-256 SHA-512 等基于MD结构的算法时. 我们就可以在知道$se">
+<meta property="og:description" content="0x01 攻击场景哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为 $MAC = H($secret, $message) 的情况. 其中 H() 为hash函数, $secret为保存在服务器上的秘密信息. 当这里hash函数为 MD4 MD5 SHA-0 SHA-1 SHA-256 SHA-512 等基于MD结构的算法时. 我们就可以在知道">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170511149444910318886.png">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170511149444648852381.png">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170509149430208341796.png">
@@ -30,10 +30,10 @@
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170530149607984047530.png">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170530149608322678645.png">
 <meta property="og:image" content="http://ony7wielg.bkt.clouddn.com/20170530149608409049699.png">
-<meta property="og:updated_time" content="2017-05-30T18:52:51.000Z">
+<meta property="og:updated_time" content="2017-06-02T13:44:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web中的密码学之哈希长度扩展攻击">
-<meta name="twitter:description" content="0x01 攻击场景哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为$MAC = H($secret, $message)  的情况. 其中H()为hash函数, $secret为保存在服务器上的秘密信息. 当这里hash函数为MD4 MD5 SHA-0 SHA-1 SHA-256 SHA-512 等基于MD结构的算法时. 我们就可以在知道$se">
+<meta name="twitter:description" content="0x01 攻击场景哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为 $MAC = H($secret, $message) 的情况. 其中 H() 为hash函数, $secret为保存在服务器上的秘密信息. 当这里hash函数为 MD4 MD5 SHA-0 SHA-1 SHA-256 SHA-512 等基于MD结构的算法时. 我们就可以在知道">
 <meta name="twitter:image" content="http://ony7wielg.bkt.clouddn.com/20170511149444910318886.png">
   
     <link rel="alternate" href="/atom.xml" title="Klaus&#39; blog" type="application/atom+xml">
@@ -82,7 +82,7 @@
     
     <div class="article-entry typo" itemprop="articleBody">
       
-        <h2 id="0x01-攻击场景"><a href="#0x01-攻击场景" class="headerlink" title="0x01 攻击场景"></a>0x01 攻击场景</h2><p>哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为<code>$MAC = H($secret, $message)</code>  的情况. 其中<code>H()</code>为hash函数, <code>$secret</code>为保存在服务器上的秘密信息. 当这里hash函数为<code>MD4</code> <code>MD5</code> <code>SHA-0</code> <code>SHA-1</code> <code>SHA-256</code> <code>SHA-512</code> 等基于MD结构的算法时. 我们就可以在知道<code>$secret</code>长度和一组 <code>$message</code> <code>$MAC</code> 的情况下构造出 <code>$message + padding + $yourmessage</code> 的hash从而绕过服务器上的某些验证.</p>
+        <h2 id="0x01-攻击场景"><a href="#0x01-攻击场景" class="headerlink" title="0x01 攻击场景"></a>0x01 攻击场景</h2><p>哈希长度扩展攻击(Hash Length Extension Attacks)用于攻击MAC计算方式为 <code>$MAC = H($secret, $message)</code> 的情况. 其中 <code>H()</code> 为hash函数, <code>$secret</code>为保存在服务器上的秘密信息. 当这里hash函数为 <code>MD4</code> <code>MD5</code> <code>SHA-0</code> <code>SHA-1</code> <code>SHA-256</code> <code>SHA-512</code> 等基于MD结构的算法时. 我们就可以在知道 <code>$secret</code> 长度和一组 <code>$message</code> <code>$MAC</code> 的情况下构造出 <code>$message + padding + $yourmessage</code> 的hash从而绕过服务器上的某些验证.</p>
 <p><img src="http://ony7wielg.bkt.clouddn.com/20170511149444910318886.png" alt=""></p>
 <h2 id="0x02-Message-Authentication-Code-MAC"><a href="#0x02-Message-Authentication-Code-MAC" class="headerlink" title="0x02 Message Authentication Code(MAC)"></a>0x02 Message Authentication Code(MAC)</h2><p>在密码学中, 消息认证码(MAC)用于保证消息的完整性(integrity)和真实性(authenticity).</p>
 <p><img src="http://ony7wielg.bkt.clouddn.com/20170511149444648852381.png" alt=""></p>
