@@ -24,7 +24,8 @@
     $('.fancybox').fancybox({
       'cyclic' : 'true',
       'autoScale' : 'true',
-      'showCloseButton' : 'false'
+      'showCloseButton' : 'false',
+      'enableEscapeButton' : 'false'
         
     })
   }
