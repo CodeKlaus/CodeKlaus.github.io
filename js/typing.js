@@ -21,7 +21,7 @@
   })
 
   if ($.fancybox) {
-    $.fancybox.defaults.speed = 600;
+    $.fancybox.defaults.speed = 60000;
     $('.fancybox').fancybox()
   }
 })(jQuery)
