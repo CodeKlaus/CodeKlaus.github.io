@@ -12,7 +12,7 @@
       }
 
       $(this).wrap('<a href="' + this.src + '" title="' + alt +
-                   '" class="fancybox"></a>')
+                   '" data-fancybox="images"></a>')
     })
 
     $(this).find('.fancybox').each(function () {
@@ -20,7 +20,5 @@
     })
   })
 
-  if ($.fancybox) {
-    $('.fancybox').fancybox()
-  }
+  $('[data-fancybox]').fancybox()
 })(jQuery)
