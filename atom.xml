@@ -439,7 +439,7 @@
     <link href="http://klaus.link/2016/USB_Install_OSX/"/>
     <id>http://klaus.link/2016/USB_Install_OSX/</id>
     <published>2016-10-16T15:26:23.000Z</published>
-    <updated>2017-05-30T20:09:29.000Z</updated>
+    <updated>2017-06-02T17:59:59.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>今天朋友的Mac出了点问题想重装系统, 然而把主分区抹了以后发现自己装不回去了…………  虽然我一直在用Mac,然而我的系统从来没有出现过问题,这也是自己第一次尝试, 中间还是有几个坑, 在网上左查右查还是费了不少劲, 在这里记录一下, 希望有人看到这篇文章可以少踩一些坑……</p>
 <h2 id="0x01-遇到”This-item-is-temporarily-unavailable-”"><a href="#0x01-遇到”This-item-is-temporarily-unavailable-”" class="headerlink" title="0x01 遇到”This item is temporarily unavailable.”"></a>0x01 遇到”This item is temporarily unavailable.”</h2><p>好啦,首先当然就是重启电脑啦,然后开机的时候按住option键,开机的时候可以选择启动磁盘,选择那个Recovery 分区(这张图上没有),就可以进去恢复模式了,或者开机按住<strong>Command+R</strong> 也可以 (朋友Mac上主分区已经抹了所以开机直接就进到这里了)</p>
@@ -464,8 +464,10 @@
 <p> <img src="http://ony7wielg.bkt.clouddn.com/2017053114961743144415.png" alt="2017053114961743144415.png"></p>
 <p>(图片来自<a href="http://www.jianshu.com/p/2ff576583361" target="_blank" rel="external">http://www.jianshu.com/p/2ff576583361</a>)</p>
 <p>然后要去网上下载OS X的镜像啦~</p>
-<pre><code>&gt;http://dl.iplaysoft.com/files/3423.html        OS X El Capitan(0dc524cc24d98b87195fb220588a7746)
-</code></pre><p>下载好了以后最好先校验一下MD5值看文件有没有丢失损坏</p>
+<blockquote>
+<p><a href="http://dl.iplaysoft.com/files/3423.html" target="_blank" rel="external">http://dl.iplaysoft.com/files/3423.html</a>        OS X El Capitan(0dc524cc24d98b87195fb220588a7746)</p>
+</blockquote>
+<p>下载好了以后最好先校验一下MD5值看文件有没有丢失损坏</p>
 <p>这个可以直接用mac自带的md5命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Klaus@Mac ~&gt; md5 /Users/klaus/Downloads/aa448e3591b4ff2a89abc4a124a26934.dmg</div><div class="line"></div><div class="line">MD5 (/Users/klaus/Downloads/aa448e3591b4ff2a89abc4a124a26934.dmg) = 0dc524cc24d98b87195fb220588a7746</div></pre></td></tr></table></figure>
 <p>下载好了以后打开这个dmg把里面那个APP拖出来,放到随意一个地方,然后用下面的命令把安装程序烧录到U盘里面:</p>
