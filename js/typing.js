@@ -21,12 +21,11 @@
   })
 
   if ($.fancybox) {
-    $('.fancybox').fancybox(
-      {
+    $('.fancybox').fancybox({
       'cyclic':'true',
       'autoScale':'true',
       'showCloseButton':'false'
-      } 
-      )
+        
+    })
   }
 })(jQuery)
