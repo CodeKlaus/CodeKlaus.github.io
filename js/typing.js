@@ -21,10 +21,7 @@
   })
 
   if ($.fancybox) {
-    $('.fancybox').fancybox({
-      image : {
-        loop : true
-      }
-    })
+    $.fancybox.defaults.speed = 600;
+    $('.fancybox').fancybox()
   }
 })(jQuery)
