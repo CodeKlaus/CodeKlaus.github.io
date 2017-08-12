@@ -406,7 +406,7 @@
             <div style="width:150px;height:250px;float:left">
                 <input style="margin-top:50%;margin-left:25%;width:50%" type="button" id="compare" value="Compare"/>
                 <form id="compare_mode">
-                    <input  style="margin-top:15px;margin-left:20%"type="radio" name="compare_mode" value="sidebyside" />sidebyside
+                    <input  style="margin-top:15px;margin-left:20%"type="radio" name="compare_mode" value="sidebyside" checked/>sidebyside
                     <br />
                     <input style="margin-bottom:15px;margin-left:30%;" type="radio" name="compare_mode" value="inline"/>inline
                 </form>
@@ -432,6 +432,7 @@
                 document.getElementById('div_texts').className = 'show';        
                 document.getElementById('contents').className = 'show';        
                 document.getElementById('div_compare').className = 'hidden';
+                document.getElementById('compare_output').className = 'hidden';
                 for(var i = 0, len = tabs.length; i < len - 1; i++) {
                     if(tabs[i] === this) {
                         tabs[i].className = 'selected';
@@ -446,6 +447,7 @@
                 document.getElementById('div_texts').className = 'hidden';        
                 document.getElementById('contents').className = 'hidden';        
                 document.getElementById('div_compare').className = 'show';
+                document.getElementById('compare_output').className = 'show';
             }
 
             document.getElementById('compare_button').onclick = showCompareTab;
