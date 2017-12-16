@@ -427,7 +427,7 @@ em {
 }
 .footer {
 	box-sizing:border-box;
-	font-size:20px;
+
 
 }
 .home-footer {
@@ -437,6 +437,7 @@ em {
 	width:60%;
 	margin:0 auto;
 	padding:50px 0;
+	font-size:20px;
 	color:#cacdd0
 }
 .archive-footer a,.archive-footer b,.archive-footer strong,.post-footer a,.post-footer b,.post-footer strong {
