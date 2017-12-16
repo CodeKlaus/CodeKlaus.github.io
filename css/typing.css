@@ -244,8 +244,11 @@ article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summ
 	display:block;
 
 }
-nav,header,footer{
+nav,footer,header{
 	font-size:20px;
+}
+.header{
+	font-size:16px;
 }
 audio,canvas,progress,video {
 	display:inline-block
