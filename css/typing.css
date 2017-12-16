@@ -1,7 +1,7 @@
 
 @import url('https://fonts.lug.ustc.edu.cn/css?family=Source+Sans+Pro:600&subset=latin-ext,vietnamese');
-	@charset "utf-8";
-	html {
+@charset "utf-8";
+html {
 	color:#333;
 	background:#fff;
 	-webkit-text-size-adjust:100%;
@@ -168,13 +168,13 @@ h1,h2,h3,h4,h5,h6 {
 	font-size:1.7em
 }
 .typo-h2,.typo h2 {
-	font-size:1.8em
+	font-size:1.53em
 }
 .typo-h3,.typo h3 {
-	font-size:1.6em
+	font-size:1.36em
 }
 .typo-h4,.typo h4 {
-	font-size:1.4em
+	font-size:1.19em
 }
 .typo-h5,.typo-h6,.typo h5,.typo h6 {
 	font-size:1.02em
