@@ -833,3 +833,4 @@ pre .javascript .function,pre .keyword {
 	width:80%
 }
 }
+.element::-webkit-scrollbar {display:none}
