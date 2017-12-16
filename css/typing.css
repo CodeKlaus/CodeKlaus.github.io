@@ -403,7 +403,7 @@ body,html {
 body,h1,h2,h3,h4,h5,h6 {
 	-webkit-font-smoothing:antialiased;
 	-moz-osx-font-smoothing:grayscale;
-	font-family:Microsoft Yahei,proxima nova,-apple-system,sans-serif;
+	font-family:Microsoft Yahei,-apple-system,sans-serif;
 	-moz-font-feature-settings:"liga" on;
 	-webkit-transition:all .25s ease;
 	transition:all .25s ease
@@ -426,7 +426,9 @@ em {
 	font-weight:lighter
 }
 .footer {
-	box-sizing:border-box
+	box-sizing:border-box;
+	font-size:20px;
+
 }
 .home-footer {
 	padding:50px 0
@@ -610,7 +612,8 @@ em {
 	color:#aeb4b9
 }
 .article .article-entry blockquote footer cite {
-	font-style:italic
+	
+	/*font-style:italic*/
 }
 .article .article-entry blockquote footer cite a {
 	color:#aeb4b9;
