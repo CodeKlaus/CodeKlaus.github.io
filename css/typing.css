@@ -554,7 +554,7 @@ em {
 }
 .archive-container hr,.category-container hr,.tag-container hr {
 	width:60%;
-	margin:20px 0 40px;
+	margin:5px 0 40px;
 	background-image:-webkit-linear-gradient(0deg,#d5d5d5,#d5d5d5,transparent)
 }
 .archive-container .archive-article-date,.category-container .archive-article-date,.tag-container .archive-article-date {
